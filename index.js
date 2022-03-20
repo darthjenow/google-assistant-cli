@@ -57,7 +57,7 @@ const promptForInput = () => {
 	});
 };
 
-const send_command = () => {
+const parse_command_line_args = () => {
 	let full_command = "";
 
 	for (let i = 2; i < process.argv.length; i++) {
@@ -67,9 +67,13 @@ const send_command = () => {
 
 	full_command = full_command.slice(0, -1);
 
-	config.conversation.textQuery = full_command;
+	return full_command;
+};
+
+const send_command = (request) => {
+	config.conversation.textQuery = request;
 	assistant.start(config.conversation, startConversation);
-}
+};
 
 const assistant = new GoogleAssistant(config.auth);
 
@@ -78,7 +82,9 @@ assistant
 		if (process.argv.length <= 2) {
 			promptForInput();
 		} else {
-			send_command();
+			let request = parse_command_line_args();
+
+			send_command(request);
 		}
 	})
 	.on('error', (error) => {
