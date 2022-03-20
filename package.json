@@ -1,0 +1,9 @@
+{
+  "name": "d1yt_testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "google-assistant": "^0.7.0"
+  }
+}
